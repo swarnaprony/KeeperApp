@@ -3,86 +3,41 @@ import Header from "./Header";
 import Note from "./Note";
 import Footer from "./Footer";
 import notes from "./notes";
+import CreateArea from "./CreateArea";
 
 
 function App() {
 
-    const [newNotes, setNewNotes] = useState([...notes]);
-    const [recentNote, setRecentNote] = useState([{
-        title:"",
-        content: ""}]);
+    const [allNotes, setAllNotes] = useState([...notes]);
 
-    function handleChange(event) {
-        console.log("Changed")
-
-       const {value, name} = event.target;
-
-       setRecentNote((prevValue) => {
-           if (name === "title") {
-               return {
-               title: value,
-               content: prevValue.content
-               };
-           } else if (name === "content") {
-               return{
-                title: prevValue.title,
-                content: value
-               };
-                
-           }
-       });
+    function addNote(newNote) {
+        setAllNotes(prevValue => {
+            return [...prevValue, newNote];
+        });
     }
 
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        console.log("Submitted")
-        setNewNotes((prevNote) => {
-            return [...prevNote, recentNote]
+    function deleteNote(id){
+        setAllNotes(prevNotes => {
+            return prevNotes.filter((note, index) => {
+                return index!== id;
+            })
         })
 
-
     }
-
+    
     return (
     <div>
         <Header/>  
-            <form onSubmit={handleSubmit}>
-                <h4>Add Title</h4>
-                <div className="note">
-                <input 
-                    onChange={handleChange} 
-                    type="text"
-                    class="no-outline" 
-                    placeholder="title" 
-                    name="title"
-                /><br></br>
-                <input 
-                    onChange={handleChange} 
-                    type="text"
-                    class="no-outline" 
-                    placeholder="content" 
-                    name="content" 
-                /><br></br>
-                <button class="no-outline" type="submit">Add</button>
-            
-            </div>
-                
-            </form> 
-
-                        
-        
-        <div>
-        {newNotes.map(note => (
+        <CreateArea onAdd={addNote} />
+        {allNotes.map((note, index) => (
             <Note
-                key={note.key}
+                key={index}
+                id={index}
                 title={note.title}
                 content={note.content}
-        />)
-
+                onDelete={deleteNote}
+            />)
         )}
-
-    </div>
         
         <Footer />
     </div>)
