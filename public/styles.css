@@ -54,4 +54,17 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+
+  input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color:white;
+    width: 50%;
+  }
+  
+  .no-outline:focus {
+    outline: none;
+  }
   

@@ -47,25 +47,30 @@ function App() {
     return (
     <div>
         <Header/>  
-        <form onSubmit={handleSubmit}>
-            <h4>Add Title</h4>
-            <div>
-            <input 
-                onChange={handleChange} 
-                type="text" 
-                placeholder="title" 
-                name="title"
-            /><br></br>
-            <input 
-                onChange={handleChange} 
-                type="text" 
-                placeholder="content" 
-                name="content" 
-            /><br></br>
-           
-        </div>
-            <button type="submit">Submit</button>
-        </form>                 
+            <form onSubmit={handleSubmit}>
+                <h4>Add Title</h4>
+                <div className="note">
+                <input 
+                    onChange={handleChange} 
+                    type="text"
+                    class="no-outline" 
+                    placeholder="title" 
+                    name="title"
+                /><br></br>
+                <input 
+                    onChange={handleChange} 
+                    type="text"
+                    class="no-outline" 
+                    placeholder="content" 
+                    name="content" 
+                /><br></br>
+                <button class="no-outline" type="submit">Add</button>
+            
+            </div>
+                
+            </form> 
+
+                        
         
         <div>
         {newNotes.map(note => (
